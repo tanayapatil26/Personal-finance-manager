@@ -3,10 +3,13 @@ import {
   Bar, BarChart, CartesianGrid, Cell, Legend, Pie, PieChart,
   ResponsiveContainer, Tooltip, XAxis, YAxis,
 } from "recharts";
+
 import {
   createTransaction, deleteTransaction, errorMessage, getCategories, getForecast,
   getMonthly, getSummary, getTransactions, importLegacyFile, setBudget, updateTransaction,
+  getSavingsGoals, createSavingsGoal, updateSavingsGoal, deleteSavingsGoal,
 } from "./api";
+
 
 const PALETTE = ["#2F4BDB", "#0E8F7E", "#D8452B", "#E0A100", "#7A4BC4", "#2B8CBE", "#8A6D5B"];
 const money = (n) =>
@@ -28,6 +31,14 @@ export default function App({ username, onLogout }) {
   const [budgetInput, setBudgetInput] = useState("");
   const [error, setError] = useState("");
 
+  const [savingsGoals, setSavingsGoals] = useState([]);
+  const [goalName, setGoalName] = useState("");
+  const [goalTarget, setGoalTarget] = useState("");
+  const [goalSaved, setGoalSaved] = useState("0");
+  const [goalDate, setGoalDate] = useState("");
+  const [goalError, setGoalError] = useState("");
+
+
   const load = useCallback(async () => {
     try {
       setError("");
@@ -46,6 +57,21 @@ export default function App({ username, onLogout }) {
   }, [month, filters]);
 
   useEffect(() => { load(); }, [load]);
+
+  const loadSavingsGoals = useCallback(async () => {
+    try {
+      const goals = await getSavingsGoals();
+      setSavingsGoals(goals);
+      setGoalError("");
+    } catch (e) {
+      setGoalError(errorMessage(e));
+    }
+  }, []);
+
+  useEffect(() => {
+    loadSavingsGoals();
+  }, [loadSavingsGoals]);
+
 
   const submit = async (e) => {
     e.preventDefault();
@@ -73,6 +99,64 @@ export default function App({ username, onLogout }) {
     try { await setBudget(month, Number(budgetInput)); setBudgetInput(""); load(); }
     catch (err) { setError(errorMessage(err)); }
   };
+
+
+  const saveGoal = async (e) => {
+    e.preventDefault();
+    try {
+      const goal = {
+        name: goalName,
+        targetAmount: Number(goalTarget),
+        savedAmount: Number(goalSaved),
+        targetDate: goalDate || null,
+      };
+      await createSavingsGoal(goal);
+      setGoalName("");
+      setGoalTarget("");
+      setGoalSaved("0");
+      setGoalDate("");
+      setGoalError("");
+      loadSavingsGoals();
+    } catch (err) {
+      setGoalError(errorMessage(err));
+    }
+  };
+
+  const removeGoal = async (id) => {
+    if (!window.confirm("Delete this savings goal?")) return;
+    try {
+      await deleteSavingsGoal(id);
+      loadSavingsGoals();
+    } catch (err) {
+      setGoalError(errorMessage(err));
+    }
+  };
+
+  const saveGoalProgress = async (goal) => {
+    const value = window.prompt(
+      "Enter the total amount saved so far:",
+      String(goal.savedAmount ?? 0)
+    );
+    if (value === null) return;
+    const savedAmount = Number(value);
+    if (!Number.isFinite(savedAmount) || savedAmount < 0) {
+      setGoalError("Enter a valid amount that is zero or more.");
+      return;
+    }
+    try {
+      await updateSavingsGoal(goal.id, {
+        name: goal.name,
+        targetAmount: Number(goal.targetAmount),
+        savedAmount,
+        targetDate: goal.targetDate || null,
+      });
+      loadSavingsGoals();
+      setGoalError("");
+    } catch (err) {
+      setGoalError(errorMessage(err));
+    }
+  };
+
 
   const importFile = async (e) => {
     const file = e.target.files[0];
@@ -202,6 +286,89 @@ export default function App({ username, onLogout }) {
           )}
         </section>
       </div>
+
+
+      <section className="panel wide">
+        <h2>Savings Goals</h2>
+        <p className="empty">Set a target, track your savings, and work toward your goal.</p>
+
+        <form className="stack" onSubmit={saveGoal}>
+          <input
+            placeholder="Goal name (e.g. New laptop)"
+            value={goalName}
+            onChange={(e) => setGoalName(e.target.value)}
+            required
+          />
+          <input
+            type="number"
+            min="0.01"
+            step="0.01"
+            placeholder="Target amount (₹)"
+            value={goalTarget}
+            onChange={(e) => setGoalTarget(e.target.value)}
+            required
+          />
+          <input
+            type="number"
+            min="0"
+            step="0.01"
+            placeholder="Already saved (₹)"
+            value={goalSaved}
+            onChange={(e) => setGoalSaved(e.target.value)}
+            required
+          />
+          <label>
+            Target date (optional)
+            <input
+              type="date"
+              value={goalDate}
+              onChange={(e) => setGoalDate(e.target.value)}
+            />
+          </label>
+          <button type="submit" className="primary">Add savings goal</button>
+        </form>
+
+        {goalError && <p className="expense">{goalError}</p>}
+
+        {savingsGoals.length === 0 ? (
+          <p className="empty">No savings goals yet. Add your first goal above!</p>
+        ) : (
+          <div className="stack">
+            {savingsGoals.map((goal) => {
+              const target = Number(goal.targetAmount);
+              const saved = Number(goal.savedAmount ?? 0);
+              const progress = target > 0
+                ? Math.min(100, (saved / target) * 100)
+                : 0;
+
+              return (
+                <div className="panel" key={goal.id}>
+                  <h3>{goal.name}</h3>
+                  <p>
+                    Saved: <strong>{money(saved)}</strong> of {money(target)}
+                  </p>
+                  <progress value={progress} max="100" style={{ width: "100%" }} />
+                  <p>{progress.toFixed(1)}% complete</p>
+                  {goal.targetDate && <p>Target date: {goal.targetDate}</p>}
+                  <div className="actions">
+                    <button type="button" onClick={() => saveGoalProgress(goal)}>
+                      Update progress
+                    </button>
+                    <button
+                      type="button"
+                      className="danger"
+                      onClick={() => removeGoal(goal.id)}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </section>
+
 
       <section className="panel">
         <div className="table-head">
