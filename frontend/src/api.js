@@ -55,3 +55,16 @@ export const errorMessage = (err) =>
   err.response?.data?.errors
     ? Object.values(err.response.data.errors).join(". ")
     : err.response?.data?.message || "Can't reach the server. Is the backend running on port 8080?";
+
+
+export const getSavingsGoals = () =>
+  api.get("/savings-goals").then((r) => r.data);
+
+export const createSavingsGoal = (goal) =>
+  api.post("/savings-goals", goal).then((r) => r.data);
+
+export const updateSavingsGoal = (id, goal) =>
+  api.put(`/savings-goals/${id}`, goal).then((r) => r.data);
+
+export const deleteSavingsGoal = (id) =>
+  api.delete(`/savings-goals/${id}`);
