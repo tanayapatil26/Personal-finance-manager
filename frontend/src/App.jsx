@@ -241,10 +241,22 @@ export default function App({ username, onLogout }) {
               <button type="button" onClick={() => { setEditingId(null); setForm(emptyForm); }}>Cancel edit</button>
             )}
           </form>
-          <label className="import">
-            Import transactions.txt from the console app
-            <input type="file" accept=".txt" onChange={importFile} />
-          </label>
+          
+
+<label className="import">
+  Import transactions from a text file (.txt)
+  <input type="file" accept=".txt" onChange={importFile} />
+</label>
+</section>
+
+<label className="import">
+  Import transactions from a text file (.txt)
+  <input type="file" accept=".txt" onChange={importFile} />
+</label>
+</section>
+
+</section>
+
         </section>
 
         <section className="panel">
