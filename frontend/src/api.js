@@ -32,7 +32,14 @@ api.interceptors.response.use(
 );
 
 export const login = (username, password) => api.post("/auth/login", { username, password }).then((r) => r.data);
-export const register = (username, password) => api.post("/auth/register", { username, password }).then((r) => r.data);
+export const register = (username, email, password) =>
+  api.post("/auth/register", { username, email, password }).then((r) => r.data);
+
+export const forgotPassword = (email) =>
+  api.post("/auth/forgot-password", { email }).then((r) => r.data);
+
+export const resetPassword = (token, newPassword) =>
+  api.post("/auth/reset-password", { token, newPassword }).then((r) => r.data);
 
 export const getTransactions = (params) => api.get("/transactions", { params }).then((r) => r.data);
 export const createTransaction = (body) => api.post("/transactions", body).then((r) => r.data);

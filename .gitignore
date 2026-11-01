@@ -3,4 +3,12 @@ dist/
 target/
 .idea/
 *.class
+
+# Environment variables and secrets
 .env
+.env.*
+!.env.example
+
+# Local log files
+backend/*-log.txt
+backend/run-error.txt

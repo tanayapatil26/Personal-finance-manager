@@ -259,7 +259,17 @@ export default function App({ username, onLogout }) {
                   dataKey="value" nameKey="name" innerRadius={55} outerRadius={95} paddingAngle={2}>
                   {categories.map((_, i) => <Cell key={i} fill={PALETTE[i % PALETTE.length]} />)}
                 </Pie>
-                <Tooltip formatter={(v) => money(v)} />
+                <Tooltip
+                  formatter={(v) => money(v)}
+                  contentStyle={{
+                    backgroundColor: "#1e293b",
+                    border: "1px solid #475569",
+                    borderRadius: "8px",
+                    color: "#ffffff"
+                  }}
+                  itemStyle={{ color: "#ffffff" }}
+                  labelStyle={{ color: "#ffffff" }}
+                />
                 <Legend />
               </PieChart>
             </ResponsiveContainer>
