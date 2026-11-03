@@ -29,6 +29,11 @@ The project evolved from a Java console application into a layered web applicati
 - **Backend API:** https://personal-finance-backend-tanaya.onrender.com
 - **Source Code:** https://github.com/tanayapatil26/Personal-finance-manager
 
+### Demo Credentials
+
+- **Email:** demo@finance.com
+- **Password:** Demo@12345
+
 > Note: The backend may take some time to respond if the hosting service has put it to sleep.
 
 ## ✨ Features
@@ -64,6 +69,7 @@ The project evolved from a Java console application into a layered web applicati
 - Forecast next-month expenses using linear regression with the least-squares method.
 - Track financial progress through monthly income and expense summaries.
 - Visualize spending patterns through interactive charts and category-wise breakdowns.
+- Forecast is trend-based and should be interpreted as an estimate, not a guarantee.
 
 <a id="application-preview"></a>
 ## 🖥️ Application Preview
