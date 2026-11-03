@@ -1,8 +1,27 @@
 # Personal Finance Manager 💰
+![Java](https://img.shields.io/badge/Java-17-orange?logo=openjdk)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.3.5-brightgreen?logo=springboot)
+![React](https://img.shields.io/badge/React-Vite-blue?logo=react)
+![MySQL](https://img.shields.io/badge/MySQL-8.4-blue?logo=mysql) 
+
 
 A full-stack personal finance management application built with **Java, Spring Boot, MySQL, React, and Vite**. Track income and expenses, manage monthly budgets, visualize spending patterns, and forecast upcoming expenses through an interactive dashboard.
 
-The project evolved from a Java console application into a layered web application with JWT authentication, persistent database storage, and a React frontend.
+The project evolved from a Java console application into a layered web application with JWT authentication, persistent database storage, and a React frontend. 
+
+## 📑 Table of Contents
+
+- [Features](#-features)
+- [Application Preview](#application-preview)
+- [Technology Stack](#️-technology-stack)
+- [Architecture](#️-architecture)
+- [REST API](#-rest-api)
+- [Run Locally](#-run-locally)
+- [Run with Docker](#-run-with-docker)
+- [Testing and Verification](#-testing-and-verification)
+- [Security Practices](#-security-practices)
+- [Future Improvements](#-future-improvements)
+- [About the Project](#about-the-project)
 
 ## 🌐 Live Demo
 
@@ -46,6 +65,7 @@ The project evolved from a Java console application into a layered web applicati
 - Track financial progress through monthly income and expense summaries.
 - Visualize spending patterns through interactive charts and category-wise breakdowns.
 
+<a id="application-preview"></a>
 ## 🖥️ Application Preview
 
 Explore the key screens of the Personal Finance Manager, from secure account access to transaction tracking, financial analytics, and savings goals.
@@ -343,6 +363,7 @@ Potential enhancements include:
 - Improved forecasting evaluation using historical data.
 - Better demo data and screenshots for new users.
 
+<a id="about-the-project"></a>
 ## 👩‍💻 About the Project
 
 This project demonstrates practical application of Java programming, REST API development, database persistence, authentication, frontend integration, financial calculations, testing, and deployment.
