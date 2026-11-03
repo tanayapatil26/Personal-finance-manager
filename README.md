@@ -38,7 +38,7 @@ The project evolved from a Java console application into a layered web applicati
 
 Watch the complete walkthrough of the Personal Finance Manager:
 
-[▶ Watch Project Demo](https://github.com/tanayapatil26/Personal-finance-manager/raw/refs/heads/master/personal-finance-manager-demo.mp4)
+[▶ Watch Project Demo](https://raw.githubusercontent.com/tanayapatil26/Personal-finance-manager/refs/heads/master/personal-finance-manager-demo.mp4)
 
 > Note: The backend may take some time to respond if the hosting service has put it to sleep.
 
