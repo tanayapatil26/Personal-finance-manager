@@ -6,8 +6,8 @@ The project evolved from a Java console application into a layered web applicati
 
 ## 🌐 Live Demo
 
-- **Frontend:** https://personal-finance-manager-frontend-w4e6.onrender.com
-- **Backend API:** https://personal-finance-manager-yf0o.onrender.com
+- **Frontend:** https://personal-finance-manager-five-eta.vercel.app/
+- **Backend API:** https://personal-finance-backend-tanaya.onrender.com
 - **Source Code:** https://github.com/tanayapatil26/Personal-finance-manager
 
 > Note: The backend may take some time to respond if the hosting service has put it to sleep.
@@ -21,6 +21,8 @@ The project evolved from a Java console application into a layered web applicati
 - Stateless authentication with Spring Security.
 - User-specific transaction and budget access.
 - Input validation for transaction requests.
+- Forgot password functionality with email-based password reset.
+- Secure password reset using time-limited reset links.
 
 ### Transaction Management
 - Add, view, update, and delete transactions.
@@ -33,12 +35,16 @@ The project evolved from a Java console application into a layered web applicati
 - Set a monthly budget.
 - View budget utilization and remaining amounts.
 - Identify when spending exceeds the configured budget.
+- Create and manage savings goals.
+- Track savings progress toward financial targets.
 
 ### Analytics and Forecasting
 - View expense breakdowns by category.
 - Compare monthly income and expenses.
 - Review historical spending trends.
 - Forecast next-month expenses using linear regression with the least-squares method.
+- Track financial progress through monthly income and expense summaries.
+- Visualize spending patterns through interactive charts and category-wise breakdowns.
 
 ## 🛠️ Technology Stack
 
@@ -53,7 +59,9 @@ The project evolved from a Java console application into a layered web applicati
 | Persistence | Spring Data JPA, Hibernate |
 | Testing | JUnit, Mockito, Spring Boot Test |
 | Build tools | Maven, npm |
-| Deployment | Render |
+| Deployment | Vercel, Render |
+| Database Hosting | Aiven MySQL |
+| Email Service | Brevo SMTP |
 
 ## 🏗️ Architecture
 
@@ -84,6 +92,7 @@ The backend follows a layered architecture:
 - **Model:** Represents application entities.
 - **DTO:** Defines request data and validation rules.
 - **Security:** Handles authentication and authorization.
+- **Email Service:** Handles password-reset emails through Brevo SMTP.
 
 ## 🔌 REST API
 
@@ -161,6 +170,7 @@ Configure the environment variables required by the application:
 - `DB_USER`: MySQL username.
 - `DB_PASSWORD`: MySQL password.
 - `JWT_SECRET`: A strong, private secret used to sign JWTs.
+- `MAIL_PASSWORD`: Brevo SMTP key used to send password-reset emails.
 
 For Windows PowerShell, for example:
 
@@ -168,6 +178,7 @@ For Windows PowerShell, for example:
 $env:DB_USER = "root"
 $env:DB_PASSWORD = Read-Host "Enter your local MySQL password"
 $env:JWT_SECRET = Read-Host "Enter your local development JWT secret"
+$env:MAIL_PASSWORD = Read-Host "Enter your Brevo SMTP key"
 ```
 
 Use your own local credentials and a suitable development secret. Do not commit secrets to the repository.
@@ -212,7 +223,7 @@ From the project root, create a local `.env` file based on `.env.example`:
 cp .env.example .env
 ```
 
-Edit `.env` and configure `DB_PASSWORD` and `JWT_SECRET` with suitable private values.
+Edit `.env` and configure `DB_USER`, `DB_PASSWORD`, `JWT_SECRET`, and `MAIL_PASSWORD` with suitable private values.
 
 Then run:
 
@@ -239,6 +250,10 @@ The following checks have been performed during development:
 - Transaction creation, retrieval, updating, and deletion were exercised.
 - User-scoped transaction access was tested for selected scenarios.
 - The deployed application was checked for login, dashboard operation, and transaction persistence after refreshing the page.
+- Forgot-password and password-reset email workflows were verified.
+- Budget management and savings-goal functionality were tested.
+- Transaction import functionality was verified.
+- Deployed frontend and backend integration was tested successfully.
 
 The frontend build reports a large JavaScript bundle warning. Reducing bundle size through code splitting is a potential future optimization.
 
