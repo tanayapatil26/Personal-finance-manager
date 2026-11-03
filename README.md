@@ -34,6 +34,12 @@ The project evolved from a Java console application into a layered web applicati
 - **Email:** demo@finance.com
 - **Password:** Demo@12345
 
+## 🎥 Project Demo
+
+Watch the complete walkthrough of the Personal Finance Manager:
+
+[▶ Watch Project Demo](./personal-finance-manager-demo.mp4)
+
 > Note: The backend may take some time to respond if the hosting service has put it to sleep.
 
 ## ✨ Features
