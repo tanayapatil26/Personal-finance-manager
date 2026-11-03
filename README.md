@@ -46,6 +46,68 @@ The project evolved from a Java console application into a layered web applicati
 - Track financial progress through monthly income and expense summaries.
 - Visualize spending patterns through interactive charts and category-wise breakdowns.
 
+## 🖥️ Application Preview
+
+Explore the key screens of the Personal Finance Manager, from secure account access to transaction tracking, financial analytics, and savings goals.
+
+### 🔐 Authentication
+
+**1. User Registration**
+
+Create a new account to start managing personal finances.
+
+![Registration](./registration.png)
+
+**2. User Login**
+
+Securely access your personal finance dashboard.
+
+![Login](./login.png)
+
+**3. Password Recovery**
+
+Reset your account password through email verification.
+
+![Password Reset](./passwordreset.png)
+
+### 📊 Dashboard & Financial Overview
+
+Get a complete overview of income, expenses, monthly budget, and available balance.
+
+![Dashboard](./dashboard.png)
+
+### 💳 Transaction Management
+
+Track and manage your financial transactions in one place.
+
+![Transactions](./Transactions.png)
+
+![Transaction Details](./transaction.png)
+
+### 📈 Income & Expense Tracking
+
+Monitor money coming in and money going out.
+
+![Income](./income.png)
+
+![Expenses](./expenses.png)
+
+### 🎯 Savings Goals
+
+Set financial targets, track savings progress, and stay motivated to achieve your goals.
+
+![Savings Goals](./savinggoal.png)
+
+![Savings Goal Progress](./savinggoal2.png)
+
+### 📉 Financial Analytics
+
+Visualise financial activity and understand your spending patterns through monthly analytics.
+
+![Financial Analytics](./analytics.png)
+
+
+
 ## 🛠️ Technology Stack
 
 | Component | Technologies |
